@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: TT2020 Base;
+    font-weight: 400;
+    src: url(/fonts/TT2020Base-Regular.woff2) format("woff2");
+  }
+
+  @font-face {
+    font-family: TT2020 Style B;
+    font-weight: 500;
+    src: url(/fonts/TT2020StyleB-Regular.woff2) format("woff2");
+  }
+}
+
+
+/* remove blue outline on focused input */
+*, input, .ProseMirror:focus {
+  outline: none;
+}

@@ -1,0 +1,25 @@
+name: aletter.to
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8099:8080"
+    networks:
+      - app-network
+  react-app:
+    build:
+      context: ./web
+      dockerfile: Dockerfile  
+    ports:
+      - 3004:3000
+    environment:
+      - NODE_ENV=production
+
+networks:
+  app-network:
+    name: postgres_postgres
+    external: true
+      
