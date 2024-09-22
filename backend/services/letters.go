@@ -30,7 +30,7 @@ func GetAllLetters(userId uuid.UUID) ([]LetterListResponse, error) {
 	var letters []models.Letter
 
 	// result := database.DB.Find(&letters, "user_id = ?", userId.String())
-	result := database.DB.Select("id, title, user_id, created_at, updated_at").Find(&letters, "user_id = ?", userId.String())
+	result := database.DB.Select("id, title, user_id, created_at, updated_at").Find(&letters, "user_id = ?", userId.String()).Order("updated_at ASC")
 
 	// Handle other possible errors
 	if result.Error != nil {

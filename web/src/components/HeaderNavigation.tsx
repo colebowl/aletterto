@@ -9,7 +9,7 @@ const HeaderNavigation: FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const authenticated = useAuth();
+  const { isAuthenticated } = useAuth();
 
   if (pathname.startsWith("/letters/")) {
     return null;
@@ -21,7 +21,7 @@ const HeaderNavigation: FC = () => {
         <Link to={`letters`} className="mr-2 text-xl font-bold">
           A Letter To __________ .
         </Link>
-        {authenticated && (
+        {isAuthenticated && (
           <div className="flex">
             <Link to={`letters/new`} className="mx-2 hover:underline">
               Write a Letter

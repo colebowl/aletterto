@@ -1,5 +1,8 @@
 import { handleFetchResponse } from "@utils/fetch";
 import { basePath } from "./api";
+import { useAuthStore } from "@hooks/auth/useAuth";
+
+const AUTH_TOKEN_STORAGE_KEY = "letters-api-token";
 
 async function requestOtp(emailAddress: string): Promise<boolean> {
   // Make the fetch request to the /letters endpoint
@@ -21,19 +24,21 @@ async function validateMagicLink(token: string) {
     },
   });
 
-  const res = await handleFetchResponse<{authToken: string}>(response);
+  const res = await handleFetchResponse<{ authToken: string }>(response);
 
-  setToken(res.authToken)
+  setToken(res.authToken);
 }
 
-const getToken = () => localStorage.getItem("letters-api-token");
+const getToken = () => localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
 
 const setToken = (token: string) =>
-  localStorage.setItem("letters-api-token", token);
+  localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, token);
 
 const logout = () => {
   console.log("logging out!");
-  localStorage.removeItem("letters-api-token");
+  localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
+
+  useAuthStore.setState({ isAuthenticated: false });
 };
 
 export const Auth = {

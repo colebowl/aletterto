@@ -38,12 +38,14 @@ const CreateEditLetter: FC = () => {
     };
   }, []);
 
-  const renderEditor = (initialContent: string) => (
-    <Editor
-      initialContent={initialContent}
-      onUpdate={({ editor }) => handleUpdate("content", editor.getHTML())}
-    />
-  );
+  const renderEditor = (initialContent: string) => {
+    return (
+      <Editor
+        initialContent={initialContent}
+        onUpdate={({ editor }) => handleUpdate("content", editor.getHTML())}
+      />
+    );
+  };
   return (
     <div>
       <Wrapper>
@@ -56,7 +58,7 @@ const CreateEditLetter: FC = () => {
               onTitleUpdate={(title) => handleUpdate("title", title)}
             />
 
-            {letter?.content ? renderEditor(letter.content) : null}
+            {letter && renderEditor(letter.content)}
             {!letterId && renderEditor("")}
           </div>
         )}

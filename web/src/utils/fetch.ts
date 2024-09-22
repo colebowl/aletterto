@@ -1,4 +1,7 @@
+import { Auth } from "@services/api/auth";
+
 export class NotFoundError extends Error {}
+export class UnauthorizedError extends Error {}
 
 export const handleFetchResponse = async <T>(response: Response) => {
   // Check if the response is OK (status 200-299)
@@ -6,6 +9,12 @@ export const handleFetchResponse = async <T>(response: Response) => {
     if (response.status === 404) {
       throw new NotFoundError("Not found");
     }
+
+    if ([401, 402, 403].includes(response.status)) {
+      await Auth.logout();
+      throw new UnauthorizedError("Unauthorized");
+    }
+
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 

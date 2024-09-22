@@ -5,6 +5,7 @@ import CreateEditLetter from "./pages/letters/CreateEditLetter";
 import Login from "@pages/auth/Login";
 import ValidateMagicLink from "@pages/auth/ValidateMagicLink";
 import Logout from "@pages/auth/Logout";
+import AuthenticatedRoute from "AuthenticatedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -25,20 +26,20 @@ export const router = createBrowserRouter([
       },
       {
         path: "letters/",
-        element: <LettersList />,
+        element: <AuthenticatedRoute component={<LettersList />} />,
       },
       {
         path: "letters/new",
-        element: <CreateEditLetter />,
+        element: <AuthenticatedRoute component={<CreateEditLetter />} />,
       },
       {
         path: "letters/:letterId",
-        element: <CreateEditLetter />,
-      },
-      {
-        path: "*",
-        element: <Navigate to="/letters" />,
+        element: <AuthenticatedRoute component={<CreateEditLetter />} />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <AuthenticatedRoute component={<Navigate to="/letters" />} />,
   },
 ]);

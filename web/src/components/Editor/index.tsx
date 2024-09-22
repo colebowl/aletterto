@@ -14,7 +14,7 @@ const extensions = [
   Document,
   Paragraph.configure({
     HTMLAttributes: {
-      class: "leading-5 text-lg line-heigh",
+      class: "leading-5 text-lg",
     },
   }),
   Text,
@@ -31,7 +31,7 @@ export const Editor: FC<Props> = (props) => {
 
   const editor = useEditor({
     autofocus: true,
-    content: initialContent || undefined,
+    content: initialContent || "<p></p>",
     extensions,
     onUpdate: onUpdate,
     editorProps: {
